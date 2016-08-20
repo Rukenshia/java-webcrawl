@@ -14,7 +14,7 @@
      */
 
     class CrawlThread implements Runnable {
-        final static Pattern urlPat = Pattern.compile("(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
+        final static Pattern urlPat = Pattern.compile("https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]");
 
         Crawler c;
         String url;
