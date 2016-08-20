@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Crawler c = new Crawler(8);
+        Crawler c = new Crawler(256);
 
         System.out.println("starting crawler");
         c.start("http://google.com");

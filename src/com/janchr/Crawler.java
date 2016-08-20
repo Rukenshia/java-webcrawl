@@ -87,10 +87,10 @@
 
     public class Crawler {
         private List<String> queue = Collections.synchronizedList(new LinkedList<>());
-
         private Map<String, VisitedURL> visited = Collections.synchronizedMap(new LinkedHashMap<>());
         private ArrayList<CrawlThread> threads = new ArrayList<>();
         private int maxThreads;
+        private boolean stop;
 
         public Crawler(int maxThreads) {
             this.maxThreads = maxThreads;
@@ -103,6 +103,7 @@
         }
 
         public synchronized void stop() {
+            this.stop = true;
             for(CrawlThread t: this.threads) {
                 // interrupting the thread should be fine for us in our use-case.
                 t.t.interrupt();
@@ -121,7 +122,7 @@
         }
 
         private void tryNext() {
-            if (!this.hasNext() || this.threads.size() == this.maxThreads) {
+            if (this.stop || !this.hasNext() || this.threads.size() == this.maxThreads) {
                 return;
             }
 

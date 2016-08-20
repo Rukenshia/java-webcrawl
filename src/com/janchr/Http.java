@@ -18,7 +18,12 @@ public class Http {
         con.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36");
         con.setInstanceFollowRedirects(true);
 
-        int statusCode = con.getResponseCode();
+        int statusCode;
+        try {
+            statusCode = con.getResponseCode();
+        } catch(RuntimeException e) {
+            throw new IOException("invalid URL");
+        }
 
         // https://www.mkyong.com/java/java-httpurlconnection-follow-redirect-example/
         boolean redirect = false;
